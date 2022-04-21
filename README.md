@@ -12,4 +12,4 @@ Stretch Goals
 Our stretch goals involve a function of the app which tells the user which recipes it can currently make based on the ingredients currently in the pantry. Another feature would allow the user to select a recipe and then the app will tell them which ingredients are missing from the pantry so that they can make a shopping list. Additionally, it would be preferable if the proper unit conversions could be applied to the pantry items and if the user could easily subtract off ingredients from the pantry by merely checking a recipe as ‘made’, whereupon the app would automatically update the pantry. 
 
 John: updating readme
-Meagan: change on test branch
+Meagan: change 4/21
