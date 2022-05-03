@@ -20,7 +20,7 @@ import android.widget.ImageButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PantryView extends AppCompatActivity {
+public class PantryView extends AppCompatActivity implements PantryViewInterface{
     private Button addButton, backButton;
 
     @Override
@@ -35,7 +35,7 @@ public class PantryView extends AppCompatActivity {
 
         // set up adapter for pantry recycler view
         Presenter presenter = new Presenter(PantryView.this);
-        PantryRecyclerViewAdapter adapter = new PantryRecyclerViewAdapter(this, presenter.showAllPantryItems());
+        PantryRecyclerViewAdapter adapter = new PantryRecyclerViewAdapter(this, presenter.showAllPantryItems(), this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -56,5 +56,11 @@ public class PantryView extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(PantryView.this, PantryItemEdit.class);
+        startActivity(intent);
     }
 }

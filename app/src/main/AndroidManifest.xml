@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PocketPantry">
         <activity
+            android:name=".PantryItemEdit"
+            android:exported="false" />
+        <activity
             android:name=".PantryAddView"
             android:exported="false" />
         <activity
