@@ -31,6 +31,7 @@ package com.example.pocketpantry;
 
 import android.content.Context;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,11 +50,11 @@ public interface Contract {
     interface Presenter{
         //Event handlers for recipes view.
         //These are all stub functions, they do not yet have definitions
-        void onClickCreateRecipe();
-        void onClickReadRecipe();
-        void onClickUpdateRecipe();
-        void onClickDeleteRecipe();
-        void showAllRecipes();
+        void onClickCreateRecipe(ArrayList<PantryItem> ingredients, int servingSize);
+        void onClickReadRecipe(int _id);
+        void onClickUpdateRecipe(Recipe recipe);
+        void onClickDeleteRecipe(int _id);
+        ArrayList<Recipe> showAllRecipes();
 
         //Event handlers for pantry view, see Presenter class for definitions
         boolean onClickCreatePantryItem(String name, int quantity,

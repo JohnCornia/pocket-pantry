@@ -13,37 +13,39 @@ import java.util.ArrayList;
 
 public class Presenter implements Contract.Presenter{
     //This object gives us access to the model
-    private DatabaseHelper databaseHelper;
+    private PantryDatabaseHelper databaseHelper;
 
     //Non-default constructor initializes databaseHelper object with context.
     //'context' is the Activity where 'this' was created
     public Presenter(Context context) {
-        this.databaseHelper = new DatabaseHelper(context);
+        this.databaseHelper = new PantryDatabaseHelper(context);
     }
     //stub function
     @Override
-    public void onClickCreateRecipe() {
+    public void onClickCreateRecipe(ArrayList<PantryItem> ingredients, int servingSize) {
 
     }
     //stub function
     @Override
-    public void onClickReadRecipe() {
+    public void onClickReadRecipe(int _id) {
 
     }
     //stub function
     @Override
-    public void onClickUpdateRecipe() {
+    public void onClickUpdateRecipe(Recipe recipe) {
 
     }
-    //stub function
+
     @Override
-    public void onClickDeleteRecipe() {
+    public void onClickDeleteRecipe(int _id) {
 
     }
+
     //stub function
     @Override
-    public void showAllRecipes() {
-
+    public ArrayList<Recipe> showAllRecipes() {
+        ArrayList<Recipe> list = new ArrayList<Recipe>();
+        return list;
     }
     //calls databaseHelper.addOne, return true if successful
     @Override
