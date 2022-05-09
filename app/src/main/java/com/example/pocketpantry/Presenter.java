@@ -23,7 +23,7 @@ public class Presenter implements Contract.Presenter{
     //stub function
     @Override
     public void onClickCreateRecipe(ArrayList<PantryItem> ingredients, int servingSize) {
-
+        RecipeDatabaseHelper recipeDatabaseHelper = new RecipeDatabaseHelper();
     }
     //stub function
     @Override
