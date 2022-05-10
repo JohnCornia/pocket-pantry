@@ -4,29 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="25dp"
     tools:context=".RecipeView">
+    <Button
+        android:id="@+id/backButtonR"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:backgroundTint="#FF9800"
+        android:text="Back"
+        android:textAlignment="textStart"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-    <ImageButton
-        android:id="@+id/RecipeBackButton"
-        android:layout_width="54dp"
-        android:layout_height="53dp"
-        app:srcCompat="?attr/actionModeCloseDrawable"
-        tools:layout_editor_absoluteX="29dp"
-        tools:layout_editor_absoluteY="27dp" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recipeRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/recipeAddButtton"
+        app:layout_constraintTop_toBottomOf="@id/backButtonR"
+        app:layout_constraintVertical_chainStyle="packed">
+    </androidx.recyclerview.widget.RecyclerView>
 
     <Button
-        android:id="@+id/pantryAddButtton2"
-        android:layout_width="76dp"
-        android:layout_height="69dp"
-        android:text="+"
-        tools:layout_editor_absoluteX="287dp"
-        tools:layout_editor_absoluteY="626dp" />
+        android:id="@+id/recipeAddButtton"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:backgroundTint="#FF9800"
+        android:text="Add a Recipe"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/recipeList"
-        android:layout_width="316dp"
-        android:layout_height="526dp"
-        android:text="Recipes"
-        tools:layout_editor_absoluteX="41dp"
-        tools:layout_editor_absoluteY="73dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,6 +26,18 @@
             android:textColor="@color/white"
             android:textSize="40sp"
             tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/mainRecipeButton"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="50dp"
+            android:backgroundTint="#FF9800"
+            android:fontFamily="sans-serif-black"
+            android:text="Recipe"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            tools:ignore="MissingConstraints" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
