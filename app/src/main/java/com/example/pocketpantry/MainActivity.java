@@ -16,7 +16,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
     // variable for button
-    private Button pantryButton;
+    private Button pantryButton, recipeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +25,22 @@ public class MainActivity extends AppCompatActivity {
 
         // variable for button find by id
         pantryButton = findViewById(R.id.mainPantryButton);
+        recipeButton = findViewById(R.id.mainRecipeButton);
 
         // onClick listener for pantry button, change activity to pantry view
         pantryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, PantryView.class);
+                startActivity(intent);
+            }
+        });
+
+        // onClick listener for recipe button, change activity to recipe view
+        recipeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, RecipeView.class);
                 startActivity(intent);
             }
         });
