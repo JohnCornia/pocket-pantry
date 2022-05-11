@@ -50,7 +50,8 @@ public interface Contract {
         }
         interface RecipeModel {
             boolean addOne(ArrayList<String> ingredients, int servingSize, String name);
-            List<PantryItem> getAll();
+
+            List<Recipe> getAll();
 
             void updateItem(Recipe recipe);
 

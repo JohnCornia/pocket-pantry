@@ -90,7 +90,7 @@ public class RecipeDatabaseHelper extends SQLiteOpenHelper implements Contract.M
     }
 
     @Override
-    public List<PantryItem> getAll() {
+    public List<Recipe> getAll() {
         return null;
     }
 
