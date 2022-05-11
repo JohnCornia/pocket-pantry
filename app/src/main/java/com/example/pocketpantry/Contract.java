@@ -39,10 +39,23 @@ public interface Contract {
     interface Model{
         //Function headers for database operations, see DatabaseHelper class
         // for definitions
-        boolean addOne(String name, int quantity, float weight);
-        List<PantryItem> getAll();
-        void updateItem(PantryItem pantryItem);
-        void deleteItem(int _id);
+        interface PantryModel {
+            boolean addOne(String name, int quantity, float weight);
+
+            List<PantryItem> getAll();
+
+            void updateItem(PantryItem pantryItem);
+
+            void deleteItem(int _id);
+        }
+        interface RecipeModel {
+            boolean addOne(ArrayList<String> ingredients, int servingSize, String name);
+            List<PantryItem> getAll();
+
+            void updateItem(Recipe recipe);
+
+            void deleteItem(int _id);
+        }
     }
 
     interface View{}
@@ -50,7 +63,7 @@ public interface Contract {
     interface Presenter{
         //Event handlers for recipes view.
         //These are all stub functions, they do not yet have definitions
-        void onClickCreateRecipe(ArrayList<PantryItem> ingredients, int servingSize);
+        void onClickCreateRecipe(ArrayList<String> ingredients, int servingSize, String name);
         void onClickReadRecipe(int _id);
         void onClickUpdateRecipe(Recipe recipe);
         void onClickDeleteRecipe(int _id);

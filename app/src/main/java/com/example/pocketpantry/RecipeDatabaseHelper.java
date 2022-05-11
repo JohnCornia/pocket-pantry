@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeDatabaseHelper extends SQLiteOpenHelper{
+public class RecipeDatabaseHelper extends SQLiteOpenHelper implements Contract.Model.RecipeModel{
     public static final String TABLE_NAME = "RECIPE_TABLE";
     public static final String COLUMN_SERVING_SIZE = "SERVING_SIZE";
     public static final String COLUMN_RECIPE_NAME = "RECIPE_NAME";
@@ -50,7 +50,8 @@ public class RecipeDatabaseHelper extends SQLiteOpenHelper{
     }
 
     //This function adds data to the database, in this case recipe items
-    public boolean addOne(Integer servingSize, String name, ArrayList<String>Ingredients){
+    @Override
+    public boolean addOne(ArrayList<String> ingredients, int servingSize, String name){
         //getWritable used to insert, update or delete records
         SQLiteDatabase RecipeDb = this.getWritableDatabase();
         SQLiteDatabase IngredientDb = this.getWritableDatabase();
@@ -71,11 +72,11 @@ public class RecipeDatabaseHelper extends SQLiteOpenHelper{
 
         Log.d(TAG, "Recipe Row ID " + recipeRowID);
 
-        for (int i = 0; i < Ingredients.size(); i++){
+        for (int i = 0; i < ingredients.size(); i++){
             ContentValues IngredientCv = new ContentValues();
 
             IngredientCv.put(COLUMN_ID_2, recipeRowID);
-            IngredientCv.put(COLUMN_INGREDIENT_NAME, Ingredients.get(i));
+            IngredientCv.put(COLUMN_INGREDIENT_NAME, ingredients.get(i));
 
             IngredientDb.insert(TABLE_NAME_2, null, IngredientCv);
         }
@@ -86,5 +87,20 @@ public class RecipeDatabaseHelper extends SQLiteOpenHelper{
         else {
             return true;
         }
+    }
+
+    @Override
+    public List<PantryItem> getAll() {
+        return null;
+    }
+
+    @Override
+    public void updateItem(Recipe recipe) {
+
+    }
+
+    @Override
+    public void deleteItem(int _id) {
+
     }
 }
