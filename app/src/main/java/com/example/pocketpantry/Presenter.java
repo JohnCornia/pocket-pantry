@@ -9,6 +9,9 @@
 package com.example.pocketpantry;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteException;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Presenter implements Contract.Presenter{
@@ -22,9 +25,16 @@ public class Presenter implements Contract.Presenter{
     }
     //stub function
     @Override
-    public void onClickCreateRecipe(ArrayList<String> ingredients, int servingSize, String name) {
+    public String onClickCreateRecipe(ArrayList<String> ingredients, int servingSize, String name) {
+        String ret = "";
         RecipeDatabaseHelper databaseHelper = new RecipeDatabaseHelper(context);
-        databaseHelper.addOne(ingredients, servingSize, name);
+        try {
+            ret = databaseHelper.addOne(ingredients, servingSize, name);
+        }
+        catch (SQLiteException e){
+            return e.toString();
+        }
+        return ret;
     }
 
     //stub function

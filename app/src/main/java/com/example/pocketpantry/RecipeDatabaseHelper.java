@@ -3,7 +3,10 @@ package com.example.pocketpantry;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
@@ -51,41 +54,51 @@ public class RecipeDatabaseHelper extends SQLiteOpenHelper implements Contract.M
 
     //This function adds data to the database, in this case recipe items
     @Override
-    public boolean addOne(ArrayList<String> ingredients, int servingSize, String name){
+    public String addOne(ArrayList<String> ingredients, int servingSize, String name){
+        //this is used to record whether or not the Recipe was successfully
+        // written to the database
+        long insert = -1;
+
         //getWritable used to insert, update or delete records
         SQLiteDatabase RecipeDb = this.getWritableDatabase();
         SQLiteDatabase IngredientDb = this.getWritableDatabase();
 
-        //Creates a map of values where the column names are used as the keys
-
         //add code here to double check that the same name isn't used twice
 
         //if same name is used, re-prompt for input on user's end
-        ContentValues RecipeCv = new ContentValues();
-        RecipeCv.put(COLUMN_SERVING_SIZE, servingSize);
-        RecipeCv.put(COLUMN_RECIPE_NAME, name);
-        long insert = RecipeDb.insert(TABLE_NAME, null, RecipeCv);
+        Cursor exists = RecipeDb.query(TABLE_NAME, new String[]{COLUMN_ID, COLUMN_RECIPE_NAME}, "COLUMN_RECIPE_NAME=?", new String[]{name}, null, null, null, null);
+        exists.close();
 
-        Cursor cursor = RecipeDb.query(TABLE_NAME, new String[]{COLUMN_ID, COLUMN_RECIPE_NAME}, "COLUMN_RECIPE_NAME=?", new String[]{name}, null, null, null, null);
-        Integer recipeRowID = new Integer(cursor.getString(0));
-        cursor.close();
-
-        Log.d(TAG, "Recipe Row ID " + recipeRowID);
-
-        for (int i = 0; i < ingredients.size(); i++){
-            ContentValues IngredientCv = new ContentValues();
-
-            IngredientCv.put(COLUMN_ID_2, recipeRowID);
-            IngredientCv.put(COLUMN_INGREDIENT_NAME, ingredients.get(i));
-
-            IngredientDb.insert(TABLE_NAME_2, null, IngredientCv);
-        }
-
-        if (insert == -1){
-            return false;
+        if(name == exists.getString(0)){
+            throw new SQLiteException("A recipe for " + name + " already exists. Please choose another name.");
         }
         else {
-            return true;
+            ContentValues RecipeCv = new ContentValues();
+            RecipeCv.put(COLUMN_SERVING_SIZE, servingSize);
+            RecipeCv.put(COLUMN_RECIPE_NAME, name);
+
+            insert = RecipeDb.insert(TABLE_NAME, null, RecipeCv);
+
+            Cursor cursor = RecipeDb.query(TABLE_NAME, new String[]{COLUMN_ID, COLUMN_RECIPE_NAME}, "COLUMN_RECIPE_NAME=?", new String[]{name}, null, null, null, null);
+            Integer recipeRowID = new Integer(cursor.getString(0));
+            cursor.close();
+
+            Log.d(TAG, "Recipe Row ID " + recipeRowID);
+
+            for (int i = 0; i < ingredients.size(); i++) {
+                ContentValues IngredientCv = new ContentValues();
+
+                IngredientCv.put(COLUMN_ID_2, recipeRowID);
+                IngredientCv.put(COLUMN_INGREDIENT_NAME, ingredients.get(i));
+
+                IngredientDb.insert(TABLE_NAME_2, null, IngredientCv);
+            }
+        }
+        if (insert == -1){
+            return "Success! " + name + " was added to your Recipes";
+        }
+        else {
+            return "Sorry, we were unable to add " + name + " to your Recipes";
         }
     }
 

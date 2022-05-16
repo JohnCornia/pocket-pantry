@@ -49,7 +49,7 @@ public interface Contract {
             void deleteItem(int _id);
         }
         interface RecipeModel {
-            boolean addOne(ArrayList<String> ingredients, int servingSize, String name);
+            String addOne(ArrayList<String> ingredients, int servingSize, String name);
 
             List<Recipe> getAll();
 
@@ -64,7 +64,7 @@ public interface Contract {
     interface Presenter{
         //Event handlers for recipes view.
         //These are all stub functions, they do not yet have definitions
-        void onClickCreateRecipe(ArrayList<String> ingredients, int servingSize, String name);
+        String onClickCreateRecipe(ArrayList<String> ingredients, int servingSize, String name);
         void onClickReadRecipe(int _id);
         void onClickUpdateRecipe(Recipe recipe);
         void onClickDeleteRecipe(int _id);
