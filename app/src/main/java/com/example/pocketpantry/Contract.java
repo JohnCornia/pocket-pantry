@@ -31,6 +31,7 @@ package com.example.pocketpantry;
 
 import android.content.Context;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,10 +39,24 @@ public interface Contract {
     interface Model{
         //Function headers for database operations, see DatabaseHelper class
         // for definitions
-        boolean addOne(String name, int quantity, float weight);
-        List<PantryItem> getAll();
-        void updateItem(PantryItem pantryItem);
-        void deleteItem(int _id);
+        interface PantryModel {
+            boolean addOne(String name, int quantity, float weight);
+
+            List<PantryItem> getAll();
+
+            void updateItem(PantryItem pantryItem);
+
+            void deleteItem(int _id);
+        }
+        interface RecipeModel {
+            String addOne(ArrayList<String> ingredients, int servingSize, String name);
+
+            List<Recipe> getAll();
+
+            void updateItem(Recipe recipe);
+
+            void deleteItem(int _id);
+        }
     }
 
     interface View{}
@@ -49,11 +64,11 @@ public interface Contract {
     interface Presenter{
         //Event handlers for recipes view.
         //These are all stub functions, they do not yet have definitions
-        void onClickCreateRecipe();
-        void onClickReadRecipe();
-        void onClickUpdateRecipe();
-        void onClickDeleteRecipe();
-        void showAllRecipes();
+        String onClickCreateRecipe(ArrayList<String> ingredients, int servingSize, String name);
+        void onClickReadRecipe(int _id);
+        void onClickUpdateRecipe(Recipe recipe);
+        void onClickDeleteRecipe(int _id);
+        ArrayList<Recipe> showAllRecipes();
 
         //Event handlers for pantry view, see Presenter class for definitions
         boolean onClickCreatePantryItem(String name, int quantity,

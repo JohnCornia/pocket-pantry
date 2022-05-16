@@ -30,15 +30,15 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseHelper extends SQLiteOpenHelper implements Contract.Model {
+public class PantryDatabaseHelper extends SQLiteOpenHelper implements Contract.Model.PantryModel {
     public static final String TABLE_NAME = "PANTRY_TABLE";
     public static final String COLUMN_PANTRY_ITEM_NAME = "PANTRY_ITEM_NAME";
     public static final String COLUMN_PANTRY_ITEM_QUANTITY = "PANTRY_ITEM_QUANTITY";
     public static final String COLUMN_PANTRY_ITEM_WEIGHT = "PANTRY_ITEM_WEIGHT";
     public static final String COLUMN_ID = "ID";
 
-    public DatabaseHelper(@Nullable Context context) {
-        //This is a no default constructor for creating management database
+    public PantryDatabaseHelper(@Nullable Context context) {
+        //This is a non default constructor for creating management database
         super(context, "pantry.db", null, 1);
     }
 
