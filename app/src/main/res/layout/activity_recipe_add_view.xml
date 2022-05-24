@@ -29,7 +29,7 @@
 
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textViewName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Recipe Name:" />
@@ -38,6 +38,43 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter recipe name here"/>
+
+
+        <TextView
+            android:id="@+id/textViewServingSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Serving Size:" />
+        <EditText
+            android:id="@+id/servingSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter serving size"/>
+
+        <TextView
+            android:id="@+id/textViewIngredient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ingredient:" />
+        <EditText
+            android:id="@+id/ingredient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter ingredient here"/>
+
+        <Button
+            android:id="@+id/addIngrdientButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            />
+
+        <ListView
+            android:id="@+id/ingredientList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
     </LinearLayout>
 
     <Button
