@@ -4,19 +4,32 @@ import java.util.ArrayList;
 
 public class Recipe {
 
-    private ArrayList<PantryItem> ingredients;
+    private ArrayList<Ingredient> ingredients;
     private int servingSize;
+    private int dbId;
+    private String name;
 
-    public Recipe(ArrayList<PantryItem> ingredients, int servingSize) {
-        this.ingredients = ingredients;
-        this.servingSize = servingSize;
+    public int getDbId() {
+        return dbId;
     }
 
-    public ArrayList<PantryItem> getIngredients() {
+    public void setDbId(int dbId) {
+        this.dbId = dbId;
+    }
+
+    public Recipe(int dbId, ArrayList<Ingredient> ingredients, int servingSize, String name) {
+        this.ingredients = ingredients;
+        this.servingSize = servingSize;
+        this.dbId = dbId;
+        this.name = name;
+
+    }
+
+    public ArrayList<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(ArrayList<PantryItem> ingredients) {
+    public void setIngredients(ArrayList<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 

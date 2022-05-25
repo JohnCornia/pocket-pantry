@@ -51,11 +51,16 @@ public interface Contract {
         interface RecipeModel {
             String addOne(ArrayList<String> ingredients, int servingSize, String name);
 
-            List<Recipe> getAll();
+            ArrayList<Recipe> getAll();
 
             void updateItem(Recipe recipe);
 
             void deleteItem(int _id);
+        }
+        interface IngredientsModel {
+            void addIngredients(ArrayList<String> ingredients, int recipeId);
+            ArrayList<Ingredient> getRecipeIngredients(int id);
+
         }
     }
 
