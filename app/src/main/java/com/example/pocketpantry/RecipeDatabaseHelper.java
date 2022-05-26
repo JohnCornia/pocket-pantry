@@ -61,7 +61,6 @@ public class RecipeDatabaseHelper extends SQLiteOpenHelper implements Contract.M
 
         //if same name is used, re-prompt for input on user's end
         Cursor exists = RecipeDb.query(TABLE_NAME, new String[]{COLUMN_ID, COLUMN_RECIPE_NAME}, "COLUMN_RECIPE_NAME=?", new String[]{name}, null, null, null, null);
-        exists.close();
 
         if(name == exists.getString(0)){
             throw new SQLiteException("A recipe for " + name + " already exists. Please choose another name.");
@@ -82,6 +81,7 @@ public class RecipeDatabaseHelper extends SQLiteOpenHelper implements Contract.M
             ingredientsDatabaseHelper.addIngredients(ingredients, recipeRowID);
 
         }
+        exists.close();
         if (insert == -1){
             return "Success! " + name + " was added to your Recipes";
         }
