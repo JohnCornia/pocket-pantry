@@ -53,7 +53,7 @@ public interface Contract {
 
             ArrayList<Recipe> getAll();
 
-            void updateItem(Recipe recipe);
+            boolean updateItem(Recipe recipe);
 
             void deleteItem(int _id);
         }
@@ -61,6 +61,8 @@ public interface Contract {
             void addIngredients(ArrayList<String> ingredients, int recipeId);
             ArrayList<Ingredient> getRecipeIngredients(int id);
 
+            void upDateIngredients(Recipe recipe);
+            void deleteIngredients(int _id);
         }
     }
 

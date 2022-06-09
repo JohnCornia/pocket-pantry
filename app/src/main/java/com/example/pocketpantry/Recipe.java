@@ -33,6 +33,10 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public int getServingSize() {
         return servingSize;
     }

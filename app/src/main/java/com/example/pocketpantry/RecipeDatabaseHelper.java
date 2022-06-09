@@ -118,12 +118,35 @@ public class RecipeDatabaseHelper extends SQLiteOpenHelper implements Contract.M
     }
 
     @Override
-    public void updateItem(Recipe recipe) {
+    public boolean updateItem(Recipe recipe) {
+        boolean successfulUpdate = false;
 
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        //This will need refactoring keys when using receipts
+        cv.put(COLUMN_RECIPE_NAME, recipe.getName());
+        cv.put(COLUMN_SERVING_SIZE, recipe.getServingSize());
+
+        IngredientsDatabaseHelper ingredientsDatabaseHelper = new IngredientsDatabaseHelper(context);
+        ingredientsDatabaseHelper.upDateIngredients(recipe);
+
+        long update = db.update(TABLE_NAME, cv, "COLUMN_ID=?", new String[] {String.valueOf(recipe.getDbId())});
+
+        if (update == 1){
+            successfulUpdate = true;
+        }
+        else{}
+
+        return successfulUpdate;
     }
 
     @Override
     public void deleteItem(int _id) {
-
+//Delete Pantry Items
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, "COLUMN_ID=?", new String[] {String.valueOf(_id)});
+        IngredientsDatabaseHelper ingredientsDatabaseHelper = new IngredientsDatabaseHelper(context);
+        ingredientsDatabaseHelper.deleteIngredients(_id);
     }
 }

@@ -73,4 +73,21 @@ public class IngredientsDatabaseHelper extends SQLiteOpenHelper implements Contr
         db.close();
         return returnList;
     }
+
+    //fix this next and add comments to everything
+    public void upDateIngredients(Recipe recipe){
+        ArrayList<String> ingredientNames = new ArrayList<String>();
+        deleteIngredients(recipe.getDbId());
+        ArrayList<Ingredient> ingredients = recipe.getIngredients();
+        for (int i = 0; i < ingredients.size(); i++){
+            ingredientNames.add(ingredients.get(i).getName());
+        }
+        addIngredients(ingredientNames, recipe.getDbId());
+    }
+
+    public void deleteIngredients(int _id){
+        //Delete all Ingredients
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, "COLUMN_ID=?", new String[] {String.valueOf(_id)});
+    }
 }

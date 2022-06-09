@@ -10,11 +10,13 @@ package com.example.pocketpantry;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteException;
+import android.util.Log;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Presenter implements Contract.Presenter{
+    private static final String TAG = "Presenter: ";
     //This object gives us access to the model
     private Context context;
 
@@ -26,6 +28,7 @@ public class Presenter implements Contract.Presenter{
     //stub function
     @Override
     public String onClickCreateRecipe(ArrayList<String> ingredients, int servingSize, String name) {
+        Log.d(TAG, "Onclick Event triggered");
         String ret = "";
         RecipeDatabaseHelper databaseHelper = new RecipeDatabaseHelper(context);
         try {
@@ -45,7 +48,8 @@ public class Presenter implements Contract.Presenter{
     //stub function
     @Override
     public void onClickUpdateRecipe(Recipe recipe) {
-
+        RecipeDatabaseHelper databaseHelper = new RecipeDatabaseHelper(context);
+        databaseHelper.updateItem(recipe);
     }
 
     @Override
@@ -57,6 +61,8 @@ public class Presenter implements Contract.Presenter{
     @Override
     public ArrayList<Recipe> showAllRecipes() {
         ArrayList<Recipe> list = new ArrayList<Recipe>();
+        RecipeDatabaseHelper databaseHelper = new RecipeDatabaseHelper(context);
+        list = databaseHelper.getAll();
         return list;
     }
     //calls databaseHelper.addOne, return true if successful
