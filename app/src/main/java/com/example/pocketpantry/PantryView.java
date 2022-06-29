@@ -60,6 +60,7 @@ public class PantryView extends AppCompatActivity implements PantryViewInterface
 
     @Override
     public void onItemClick(int position) {
+
         Intent intent = new Intent(PantryView.this, PantryItemEdit.class);
         startActivity(intent);
     }
